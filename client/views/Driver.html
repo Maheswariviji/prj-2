@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-default btn-block btn-lg" ng-click="ShowCurrentBooking()">Show Current Booking</button><br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="drivermap" ng-init="initMap()" style="margin-top: 0px; height: 600px; width:100%"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="mymodal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+                <h4 class="modal-title" id="myModalLabel">
+								You got a new booking !
+							</h4>
+            </div>
+            <div class="modal-body" style="background-color: #EBEDED">
+                <table border="0" width="100%" class="table">
+                    <tr>
+                        <th>Pickup Location</th>
+                        <td><span id="pickupLoc"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Destination Location</th>
+                        <td><span id="destinationLoc"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Customer Name</th>
+                        <td><span id="custname"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Contact Number</th>
+                        <td><span id="custcontact"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Total Fare</th>
+                        <td><span id="tfare"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+            </div>
+        </div>
+    </div>
+</div>

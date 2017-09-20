@@ -1,0 +1,113 @@
+.panel {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.panel-heading {
+    padding: 10px 15px;
+    margin: -15px -15px 15px;
+    background-color: #337ab7;
+    border-bottom: 1px solid #ddd;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 17.5px;
+    font-weight: 500;
+    color:white;
+}
+.slogan{
+  color: white;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+.homelinks{
+  color: white;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.panel-login{
+  background-color: #185B87;
+}
+
+.panel-heading-login{
+  background-color: #185B87;
+  color: white;
+  font-size: 15pt;
+}
+
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.booknow-btn{
+  padding: 20px 50px;
+}
+
+.separator{
+  color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.hr1{
+    width: 45%;
+    float: left;
+    border: none;
+    height: 5px;
+    color: white;
+    background-color: white;
+}
+
+.hr2{
+    width: 45%;
+    float: right;
+    /*border: none;*/
+    height: 5px;
+    color: white;
+    background-color: white;
+}
+#distance, #duration, #fare{
+  font-size: 8pt;
+  font-weight: bold;
+}
+
+.norows{
+  color:red;
+}
+.my-navbar{
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0px;
+}
+.mycontent-left {
+  border-left: 1px solid #333;
+}
+.top-margin{
+  margin-top: 10px;
+}
+.confirm-message{
+  text-align: center;
+}
+/*.my-navbar .navbar-nav li a{
+  color: white;
+}*/
+.pickup{
+  color: #BF0F50;
+}
+.destination{
+  color: #044EB5;
+}
+#drivermap{
+ height: 100%;
+}

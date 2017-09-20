@@ -1,0 +1,11 @@
+var app = require('angular').module('cabBooking');
+app.controller('MainController', require('./MainController'));
+app.controller('AddCabController', require('./AddCabController'));
+app.controller('BookCabController', require('./BookCabController'));
+app.controller('TariffController', require('./TariffController'));
+app.controller('RegisterController', require('./RegisterController'));
+app.controller('LoginController', require('./LoginController'));
+app.controller('NavBarController', require('./NavBarController'));
+app.controller('DriverController', require('./DriverController'));
+app.controller('MyRidesController', require('./MyRidesController'));
+app.controller('ChangePasswordController', require('./ChangePasswordController'));

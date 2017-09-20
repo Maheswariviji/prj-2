@@ -1,0 +1,219 @@
+<style>
+    #map {
+        height: 100%;
+        width: 100%;
+        margin-top: 20px;
+    }
+</style>
+<div class="container" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-lg-6">
+            <label>Your Pickup Location </label>
+            <input id="pickup" type="text" class="form-control" ng-model="Booking.PickupLocation" placeholder="Enter Pickup location"><br/>
+            <label>Your Destination Location </label>
+            <input id="destination" class="form-control" ng-model="Booking.DestinationLocation" type="text" placeholder="Enter Destination location" style="margin-left: 0px"><br/>
+            <label>Choose Cab Type </label><br/>
+            <table class="cabTypeTable">
+                <tr>
+                    <td>
+                        <div class="cabTypeDiv">
+                            <img id="Micro" src="public/images/micro.png" style="max-width: 100%" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cabTypeDiv">
+                            <img id="Mini" src="public/images/mini.png" style="max-width: 100%" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cabTypeDiv">
+                            <img id="Prime Sedan" src="public/images/sedan.png" style="max-width: 100%" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="cabTypeDiv">
+                            <img id="Prime SUV" src="public/images/suv.png" style="max-width: 100%" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Micro</td>
+                    <td>Mini</td>
+                    <td>Prime Sedan</td>
+                    <td>Prime SUV</td>
+                </tr>
+            </table>
+            <button type="button" class="btn btn-success btn-block" ng-click="calculateFare()" id="checkButton">Get Estimate of Your Ride</button>
+            <br/>
+            <table id="estimation" style="margin-top: 10px; display:none" cellspacing="10px">
+                <tr>
+                    <td>
+                        <div class="panel panel-info" style="text-align: center" id="distpanel">
+                            <div class="panel-body">
+                                <img src="public/images/distance2.jpg" width="50px" /><br/><br/>
+                                <div id="distance"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="panel panel-info" style="text-align: center" id="durpanel">
+                            <div class="panel-body">
+                                <img src="public/images/duration.jpg" width="50px" /><br/><br/>
+                                <div id="duration"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="panel panel-info" style="text-align: center" id="rupeepanel">
+                            <div class="panel-body">
+                                <img src="public/images/rupee3.png" width="50px" /><br/><br/>
+                                <div id="fare"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <table width="100%" cellspacing="20">
+                            <tr>
+                                <td>
+                                    <button ng-click="RideNow()" class="btn btn-success btn-block" id="rideNowButton">Ride Now</button>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <button ng-click="ShowRideLaterModal()" class="btn btn-warning btn-block" id="rideLaterButton">Ride Later</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <div id="map" ng-init="initMap()" style="margin-top: 0px; height: 600px; width:100%"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mymodal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+                <h4 class="modal-title" id="myModalLabel">
+								Your cab is booked !
+							</h4>
+            </div>
+            <div class="modal-body" style="background-color: #EBEDED">
+                <table border="0" class="table" width="100%">
+                    <tr>
+                        <td colspan="2" align="center"><img id="driverimage" src="../public/images/nophoto.png" width="100" height="100" style="border-radius: 50%" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <h4 id="drivername"></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Pickup Location</th>
+                        <td><span id="pickupLoc"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Destination Location</th>
+                        <td><span id="destinationLoc"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Contact No</th>
+                        <td><span id="contactno"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Vehicle</th>
+                        <td><span id="vehicle"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Fare</th>
+                        <td><span id="modalfare"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="rideLaterModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title" id="myModalLabel">
+								Schedule your ride
+							</h3>
+            </div>
+            <div class="modal-body" style="background-color: #EBEDED">
+                <form name="form1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group has-feedback">
+                                    <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
+                                    <input type="text" id="pickupdate" class="form-control" placeholder="Choose Pickup Date" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group has-feedback">
+                                    <i class="glyphicon glyphicon-time form-control-feedback"></i>
+                                    <input type="text" id="pickuptime" class="form-control" placeholder="Choose Pickup Time" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback">
+                                    <i class="glyphicon glyphicon-map-marker form-control-feedback"></i>
+                                    <input type="text" disabled id="modalpickup" class="form-control" placeholder="Pickup Location" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback">
+                                    <i class="glyphicon glyphicon-map-marker form-control-feedback"></i>
+                                    <input type="text" disabled id="modaldestination" class="form-control" placeholder="Destination Location" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <select class="form-control" id="cabtype">
+                          <option>Micro</option>
+                          <option>Mini</option>
+                          <option>Prime Sedan</option>
+                          <option>Prime SUV</option>
+                        </select>
+                            </div>
+                        </div>
+                        <div class="row top-margin">
+                            <div class="col-md-6">
+                                <button class="btn btn-success btn-block" data-dismiss="modal" ng-click="RideLater()">Book Ride</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <button ng-click="RideNow()">Show Ride Later Modal</button> -->

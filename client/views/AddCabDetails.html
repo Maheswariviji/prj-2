@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <form id="form1" name="up.upload_form">
+        <div class="row">
+            <div class="col-lg-3" style="width: 15%">
+                <img style="width:100px;" ngf-thumbnail="up.file || './public/images/nophoto.png'" />
+                <!-- <button type="button" class="btn btn-warning btn-block" style="margin-top:1px; margin-left:1px">Upload Picture</button> -->
+                <input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" />
+            </div>
+            <div class="col-lg-4">
+                <!-- <form name="form1" action="/upload" method="post"> -->
+                <legend>Driver Details</legend>
+                <input type="text" placeholder="First Name" ng-model="Cab.FirstName" class="form-control" />
+                <input type="text" placeholder="Last Name" ng-model="Cab.LastName" class="form-control" />
+                <textarea rows="5" cols="50" placeholder="Address" ng-model="Cab.Address" class="form-control"></textarea>
+                <input type="text" placeholder="Contact No" ng-model="Cab.ContactNo" class="form-control" />
+                <input type="text" placeholder="Email Address" ng-model="Cab.Email" class="form-control" />
+                <input type="text" placeholder="License No" ng-model="Cab.LicenseNo" class="form-control" /><br/><br/>
+                <legend>Cab Details</legend>
+                <select class="form-control" ng-model="Cab.CabType">
+                    <option>-- Select Cab Type --</option>
+                    <option>Micro</option>
+                    <option>Mini</option>
+                    <option>Prime Sedan</option>
+                    <option>Prime SUV</option>
+                </select>
+                <input type="text" placeholder="Make" ng-model="Cab.Make" class="form-control" />
+                <input type="text" placeholder="Model" ng-model="Cab.Model" class="form-control" />
+                <input type="text" placeholder="Registration No" ng-model="Cab.RegNo" class="form-control" />
+                <button class="btn btn-success" ng-click="SaveCabDetails()" style="margin-top: 20px">Submit Details</button>
+                <!-- </form> -->
+            </div>
+            <div class="col-lg-5">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in DriverData">
+                            <td><img src="../public/uploads/{{data.Cab[0].Photo}}" width="50" height="50" style="border-radius: 50%" /></td>
+                            <td>{{data.FirstName}}</td>
+                            <td>{{data.Email}}</td>
+                            <td>{{data.MobileNumber}}</td>
+                            <td><button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span></button></td>
+                            <td><button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" ng-click="DeleteCabDetails(data.MobileNumber)"></span></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

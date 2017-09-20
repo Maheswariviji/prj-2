@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Tariff Plans</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a id="modal-314179" href="#/TariffPlan#mymodal" role="button" class="btn btn-success" data-toggle="modal"><span class="glyphicon glyphicon-plus"></span> Add New Tariff Plan</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered top-margin">
+                <tr>
+                    <th>Cab Type</th>
+                    <th>Normal Hour Rate / KM</th>
+                    <th>Peak Hour Rate / KM</th>
+                    <th>Start Peak Time</th>
+                    <th>End Peak Time</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="t in tariffdata">
+                    <td>{{t.CabType}}</td>
+                    <td>&#8377; {{t.NormalRate}}</td>
+                    <td>&#8377; {{t.PeakRate}}</td>
+                    <td>{{t.StartPeakHour}}</td>
+                    <td>{{t.EndPeakHour}}</td>
+                    <td>
+                        <button class="btn btn-warning glyphicon glyphicon-edit" ng-click="getTariffById(t)"></button>
+                    </td>
+                    <td><button class="btn btn-danger glyphicon glyphicon-trash" ng-click="showConfirm(t)"></button></td>
+                </tr>
+                <tr ng-show="tariffdata.length==0">
+                    <td colspan="8" align="center"><span class="norows">No Tariff Plans Found.</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mymodal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+                <h4 class="modal-title" id="myModalLabel">
+								Add New Tariff Plan
+							</h4>
+            </div>
+            <form id="form1">
+                <div class="modal-body">
+                    <select class="form-control" ng-model="Tariff.CabType">
+                  <option>--Select Cab Type--</option>
+                  <option>Mini</option>
+                  <option>Micro</option>
+                  <option>Prime Sedan</option>
+                  <option>Prime SUV</option>
+                </select>
+                    <input type="text" class="form-control" ng-model="Tariff.NormalRate" placeholder="Normal Hour Rate Per KM" />
+                    <input type="text" class="form-control" ng-model="Tariff.PeakRate" placeholder="Peak Hour Rate Per KM" />
+                    <input id="starttimepicker" class="form-control" ng-model="Tariff.StartPeakHour" placeholder="Starting Peak Hour" />
+                    <input id="endtimepicker" class="form-control" ng-model="Tariff.EndPeakHour" placeholder="Ending Peak Hour" />
+                    <!-- <button id="button1">Click</button> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="addTariff()">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

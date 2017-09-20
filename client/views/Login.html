@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form ng-submit="LoginUser()">
+                <div ng-show="success==false" class="alert alert-danger">
+                    <h4 id="msg"></h4>
+                </div>
+                <input required type="text" placeholder="Email" ng-model="User.Email" class="form-control" />
+                <input required type="password" placeholder="Password" ng-model="User.Password" class="form-control" />
+                <button type="submit" class="btn btn-success" style="margin-top: 20px">Login</button>
+                <button class="btn btn-warning" style="margin-top: 20px">Cancel</button>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
